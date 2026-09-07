@@ -1,4 +1,4 @@
-package org.manvik.confi;
+package org.manvik.jdbc.dto.confi;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,35 +1,84 @@
 package org.manvik;
 
-import org.manvik.confi.DBConnection;
-import org.manvik.dto.BookDAO;
+import org.manvik.hibernate.Book;
+import org.manvik.hibernate.BookService;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        BookDAO bookDAO = new BookDAO();
+public class App {
+    public static void main(String[] args) {
 
-//        bookDAO.addBook(1,"Ice breaker","Hanneh Grace","contemporary romance and sports romance and for Adult reader only","Start","3","No comment now");
-//        bookDAO.addBook(2,"Yoga the spritual path","Swami Vivekananda","Body, Mind & Spirit","chapter 1 - Completed","5","Best book ever - Starting life of swami ji is just lik me");
 
-//        Read all Row of Table
-//        bookDAO.readAllBooks();
+//        ADD DATA INTO DATABSE -------------------------------------
+//        SessionFactory factory = HibernateUtil.getSessionFactory();
+//        Session session = factory.openSession();
+//
+//        Transaction tx = null;
+//
+//        try {
+//            tx = session.beginTransaction();
+//
+////            Book book = new Book("Deep Work", "Cal Newport", "Productivity", "WISHLIST", 0, "Recommended by a friend");
+//            Book book = new Book("Deep Work", "Cal Newport", "Productivity", "WISHLIST", 3, "Recommended by a friend");
+//            session.persist(book);
+//
+//            tx.commit();
+//            System.out.println("✅ Book saved via Hibernate!");
+//
+//        } catch (Exception e) {
+//            if (tx != null) tx.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//            factory.close();
+//        }
 
-//        Update
-        bookDAO.updateDAO(1, "Love story and english is on harder to read",3,"No comments for now");
+//        READ DATA FROM DATABASE ------------------------------------
+        BookService service = new BookService();
+//        ---------------------------Fatch using ID
 
-//        Delete Any table using id
-//        bookDAO.deleteBook(5);
-//        bookDAO.deleteBook(6);
-//        bookDAO.deleteBook(3);
-//        bookDAO.deleteBook(4);
+//        System.out.println("-----Fetch by ID-----");
+//        Book book = service.getBookById( 1 );
+//        if( book != null )
+//        {
+//            System.out.println( "Book ID: " + book.getAuthor() + "by" +  book.getTitle() );
+//        }
+//        else
+//        {
+//            System.out.println( "Book ID not found" );
+//        }
+
+//      -----------------------------Fetch all tables
+//        System.out.println("-----Fetch ALL DATA-----");
+//        List<Book> allBooks = service.getAllBooks();
+//
+//        System.out.println("Total books found: " + allBooks.size());
+//
+//        for (Book book : allBooks) {
+//            System.out.println(book);
+//        }
+
+//        Update data -----------------
+//        System.out.println("-----update data------");
+//        service.updateBookStatus(1,"Completed");
+//
+//        System.out.println("--- Verify update ---");
+//        Book updated = service.getBookById(1);
+//        System.out.println(updated);
+
+
+//        Delete call
+        System.out.println("--- Delete ---");
+        service.deleteBookById(2);
+
+        System.out.println("--- Verify deletion (fetch all) ---");
+        List<Book> allBooks = service.getAllBooks();
+
+        System.out.println("Total books found: " + allBooks.size());
+
+        for (Book book : allBooks) {
+            System.out.println(book);
+        }
 
     }
 }

@@ -1,6 +1,6 @@
-package org.manvik.dto;
+package org.manvik.jdbc.dto;
 
-import org.manvik.confi.DBConnection;
+import org.manvik.jdbc.dto.confi.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
