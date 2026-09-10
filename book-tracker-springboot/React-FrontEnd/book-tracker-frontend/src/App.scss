@@ -177,6 +177,22 @@ body {
     }
   }
 
+  &__download {
+    font-family: 'IM Fell English', serif;
+    font-size: 0.85rem;
+    color: $gold-light;
+    background: $forest;
+    border: 2px solid $gold;
+    border-radius: 2px;
+    padding: 0.4rem 0.8rem;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
   &__actions {
     display: flex;
     gap: 0.5rem;

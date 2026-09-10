@@ -18,15 +18,17 @@ public class Book {
     private int rating;
     @Column(columnDefinition = "TEXT")
     private String notes;
+    private String pdfUrl;
 
     public Book() {}
-    public Book(String title, String author, String genre, String status, int rating, String notes) {
+    public Book(String title, String author, String genre, String status, int rating, String notes, String pdfUrl) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.status = status;
         this.rating = rating;
         this.notes = notes;
+        this.pdfUrl = pdfUrl;
     }
 
     public int getId() {
@@ -85,6 +87,14 @@ public class Book {
         this.notes = notes;
     }
 
+    public String getPdfUrl() {
+        return pdfUrl;
+    }
+
+    public void setPdfUrl(String pdfUrl) {
+        this.pdfUrl = pdfUrl;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -95,6 +105,7 @@ public class Book {
                 ", status='" + status + '\'' +
                 ", rating=" + rating +
                 ", notes='" + notes + '\'' +
+                ", pdfUrl='" + pdfUrl + '\'' +
                 '}';
     }
 }

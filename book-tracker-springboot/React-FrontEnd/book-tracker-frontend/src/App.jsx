@@ -10,6 +10,7 @@ function App() {
   const [status, setStatus] = useState("WISHLIST");
   const [rating, setRating] = useState(1);
   const [notes, setNotes] = useState("");
+  const [pdfUrl, setPdfUrl] = useState("");
 
   const fetchBooks = () => {
     fetch("http://localhost:8080/api/books")
@@ -30,6 +31,7 @@ function App() {
     setStatus(book.status);
     setRating(book.rating);
     setNotes(book.notes);
+    setPdfUrl(book.pdfUrl || "");
   };
 
   const handleSubmit = (e) => {
@@ -42,6 +44,7 @@ function App() {
       status,
       rating: Number(rating),
       notes,
+      pdfUrl,
     };
 
     const url = editingId
@@ -65,6 +68,7 @@ function App() {
         setStatus("WISHLIST");
         setRating(1);
         setNotes("");
+        setPdfUrl("");
       })
       .catch((error) => console.error("Error saving book:", error));
   };
@@ -125,6 +129,13 @@ function App() {
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
         />
+        <input
+          className="book-form__input"
+          placeholder="PDF Link (optional)"
+          value={pdfUrl}
+          onChange={(e) => setPdfUrl(e.target.value)}
+        />
+
         <button className="book-form__submit" type="submit">
           {editingId ? "Update Book" : "Add Book"}
         </button>
@@ -136,16 +147,35 @@ function App() {
             <span className="book-card__info">
               <span className="book-card__title">{book.title}</span>
               <span className="book-card__author"> by {book.author}</span>
-              <span className={`book-card__status book-card__status--${book.status.toLowerCase()}`}>
+              <span
+                className={`book-card__status book-card__status--${book.status.toLowerCase()}`}
+              >
                 {book.status}
               </span>
               <span className="book-card__rating">{book.rating}/5</span>
+
+              {book.pdfUrl && (
+                <a
+                  className="book-card__download"
+                  href={book.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download PDF
+                </a>
+              )}
             </span>
             <span className="book-card__actions">
-              <button className="book-card__edit" onClick={() => startEdit(book)}>
+              <button
+                className="book-card__edit"
+                onClick={() => startEdit(book)}
+              >
                 Edit
               </button>
-              <button className="book-card__delete" onClick={() => handleDelete(book.id)}>
+              <button
+                className="book-card__delete"
+                onClick={() => handleDelete(book.id)}
+              >
                 Delete
               </button>
             </span>
